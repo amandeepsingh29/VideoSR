@@ -16,7 +16,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def load_model():
     model_path = 'models/RRDB_ESRGAN_x4.pth'  # Pre-trained model
     model = arch.RRDBNet(3, 3, 64, 23, gc=32)
-    model.load_state_dict(torch.load(model_path), strict=True)
+    model.load_state_dict(torch.load(model_path, weights_only=True), strict=True)  # Avoid future warnings
     model.eval()
     return model.to(device)
 
@@ -48,14 +48,14 @@ if uploaded_file is not None:
     image = np.array(cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1))
     
     # Display original image
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
     
     # Apply super-resolution
     st.write("Enhancing image resolution...")
     result_image = process_image(image, model)
     
     # Display result
-    st.image(result_image, caption="Enhanced Image", use_column_width=True)
+    st.image(result_image, caption="Enhanced Image", use_container_width=True)
     
     # Provide download link
     _, ext = osp.splitext(uploaded_file.name)
