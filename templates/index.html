@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Super-Resolution</title>
+    <!-- Correct link to static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Video for Super-Resolution</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="file">Choose a video file:</label>
+            <input type="file" name="file" id="file" accept=".mp4, .avi, .mov" required>
+            <button type="submit">Upload and Process</button>
+        </form>
+    </div>
+
+    <!-- Correct link to static JS (if you have a script.js file) -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
